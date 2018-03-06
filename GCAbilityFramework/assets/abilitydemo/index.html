@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<title>Hello MUI</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link rel="stylesheet" href="css/mui.min.css">
+		<style type="text/css">
+			#list {
+				/*避免导航边框和列表背景边框重叠，看起来像两条边框似得；*/
+				margin-top: -1px;
+			}
+		</style>
+		<style type="text/css">
+			li {
+				padding: 0.8em;
+				border-bottom: 1px solid #eaeaea;
+			}
+			
+			li:active {
+				background: #f4f4f4;
+			}
+			
+			.item {
+				display: block;
+				background: no-repeat right center url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAsCAYAAAB/nHhDAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAKwwAACsMBNCkkqwAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8yOC8xMqLz6JEAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzVxteM2AAABJ0lEQVRYhe3Wv6rCMBQG8C/VN1AEd3HSzuYO3jr4knkY0UE62xTBcp9A8A0uHhc72CZp/lQQyZmT7xfSJKeMiPDOSt6aHoEIRKAbkLKioqiCrroWkLKi+51ARAhBlEAdXlcI0gLK8u8lPBRpAYvFjCUJUw72QZRbtFzOe0O0H7kvxHhM83yfhiJdF+2c5/utCTmdLnS93rQQs2mZQogN59lOdbrqmk7HmExGrZVYAU9kzXl2cEWsgSfys1r9Hk1TmogTAABFcTFOaQJOr6mUlVO4E9B8n2zCrQHfcAAYmoKFEAPOs39dOGMMaTpXX5J6jGlTTSu3CQcsGk5IuBboK1wJ6BqOT7gS0DUcn3AlALR7gW84YHGKiOAd3gn0UV/+6xiBCHwG8AByzMrOPKV7sAAAAABJRU5ErkJggg==);
+				background-size: 12px 22px;
+				-ms-touch-action: auto;
+			}
+			
+			.chs {
+				font-size: 0.8em;
+				color: #838383;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">国创移动能力框架</h1>
+		</header>
+		<div class="mui-content" style="background:#FFFFFF;">
+			<ul style="list-style:none;margin:0;padding:0;text-align:left;">
+				<li onclick="scanGetCode()">
+					<span class="item">Barcode
+					<div class="chs">二维码扫描</div>
+				</span>
+				</li>
+				<li onclick="takePhoto()">
+					<span class="item">Camera
+					<div class="chs">拍照</div>
+				</span>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Gallery
+					<div class="chs">相册操作</div>
+				</span>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Database
+					<div class="chs">数据库操作</div>
+				</span>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Audio
+					<div class="chs">录音操作</div>
+				</span>
+				</li>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Geolocation
+					<div class="chs">定位</div>
+				</span>
+				</li>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Contacts
+					<div class="chs">联系人操作</div>
+				</span>
+				</li>
+				</li>
+				<li onclick="mui.toast('开发中')">
+					<span class="item">Messaging
+					<div class="chs">短信</div>
+				</span>
+				</li>
+
+			</ul>
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="bridge.js"></script>
+		<script>
+			mui.init({
+				swipeBack: false
+			});
+
+			/**
+			 * 扫描
+			 * @param {Object}  callback（回调函数，返回data ）
+			 */
+			function scanGetCode() {
+				Mplat.scanGetCode({
+					callback: function(data) {
+						mui.toast(data);
+					}
+				});
+			}
+
+			/**
+			 * 拍照
+			 * @param {Object} params(参数) callback（回调函数，返回data ）
+			 */
+			function takePhoto() {
+				Mplat.takePhoto({
+					params: {
+						"keyword": "ceshi",
+						"waterMarkFlag": "ceshi2",
+						"waterMarkInfo": "ceshi3"
+					},
+					callback: function(data) {
+						mui.toast(data);
+					}
+				});
+			}
+
+			function goNextPage(id, url) {
+				mui.openWindow({
+					id: id,
+					url: url,
+					extras: {},
+					waiting: {
+						autoShow: true,
+						title: "正在加载！"
+					}
+				});
+			};
+		</script>
+	</body>
+
+</html>
